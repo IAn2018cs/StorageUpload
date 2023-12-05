@@ -14,7 +14,8 @@ bucket = storage_client.bucket(BUCKET_NAME)
 def upload_storage(path: str, destination_blob_name: str):
     try:
         blob = bucket.blob(destination_blob_name)
-        blob.upload_from_filename(path)
+        generation_match_precondition = 0
+        blob.upload_from_filename(path, if_generation_match=generation_match_precondition)
         print(f"File {path} uploaded to {destination_blob_name}")
         return destination_blob_name
     except Exception as e:
