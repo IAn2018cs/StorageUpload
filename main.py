@@ -13,6 +13,7 @@ bucket = storage_client.bucket(BUCKET_NAME)
 
 def upload_storage(path: str, destination_blob_name: str):
     try:
+        print(f'start upload: {destination_blob_name}')
         blob = bucket.blob(destination_blob_name)
         generation_match_precondition = 0
         blob.upload_from_filename(path, if_generation_match=generation_match_precondition)
